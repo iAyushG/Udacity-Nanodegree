@@ -1,0 +1,40 @@
+/*QUERY 1 - Used for FIRST Insight*/
+SELECT G.Name AS "GENRE", 
+       count(T.TrackId) AS "NO. OF TRACKS" 
+FROM Genre G 
+JOIN Track T 
+ON G.GenreId = T.GenreId 
+GROUP BY 1 
+ORDER BY 2 DESC;
+
+/*QUERY 2 - Used for SECOND Insight*/
+SELECT C.Country AS "COUNRTY", 
+       sum(I.Total) AS "MONEY SPENT" 
+FROM Customer C 
+JOIN Invoice I 
+ON C.CustomerId = I.CustomerId 
+GROUP BY 1 
+ORDER BY 2 DESC, 1
+LIMIT 5;
+
+/*QUERY 3 - Used for THIRD Insight*/
+SELECT M.MediaTypeId AS "ID", 
+       M.Name AS "TYPE OF ENCODING", 
+       count(T.MediaTypeId) AS "NO. OF TRACKS" 
+FROM MediaType M 
+JOIN Track T 
+ON M.MediaTypeId = T.MediaTypeId 
+GROUP BY 1, 2;
+
+/*QUERY 4 - Used for FOURTH Insight*/
+SELECT E.EmployeeId AS "EMPLOYEE ID", 
+       E.FirstName AS "FIRST NAME", 
+       E.LastName AS "LAST NAME", 
+       sum(I.Total) AS "TOTAL SALES" 
+FROM Employee E 
+JOIN Customer C 
+ON E.EmployeeId = C.SupportRepId 
+JOIN Invoice I 
+ON C.CustomerId = I.CustomerId 
+GROUP BY 1, 2, 3 
+ORDER BY 4 DESC;
